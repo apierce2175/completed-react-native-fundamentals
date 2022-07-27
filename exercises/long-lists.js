@@ -1,3 +1,39 @@
+import React from 'react';
+import { Text, View, StyleSheet, FlatList, Dimensions } from 'react-native';
+
+const windowWidth = Dimensions.get('window').width;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    width: windowWidth,
+  },
+  item: {
+    width: windowWidth,
+    borderWidth: 1,
+    padding: 10,
+  },
+  itemText: {
+    fontSize: 20,
+  },
+})
+
+const simpleFlatList = () => {
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={PEOPLE}
+        renderItem={({item}) => <View style={styles.item}><Text style={styles.itemText}>{item.name.title} {item.name.first} {item.name.last}</Text></View>}
+      />
+    </View>
+  );
+};
+
+export default simpleFlatList;
+
 const PEOPLE = [
   {
     name: {
