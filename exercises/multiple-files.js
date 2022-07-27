@@ -1,24 +1,10 @@
 import React from "react";
-import { View, TouchableOpacity, Text } from "react-native";
+import { View } from "react-native";
+import { CustomButton } from './custom-btn.component';
 
-export const Button = ({ text, onPress, buttonStyle = {} }) => (
-  <TouchableOpacity
-    onPress={onPress}
-    style={{
-      backgroundColor: "#ff637c",
-      alignSelf: "center",
-      paddingHorizontal: 20,
-      paddingVertical: 10,
-      marginVertical: 15,
-      ...buttonStyle,
-    }}
-  >
-    <Text style={{ color: "#fff" }}>{text}</Text>
-  </TouchableOpacity>
-);
 
 export default () => (
   <View style={{ marginTop: 20 }}>
-    <Button text="Say hello" onPress={() => alert("hello!")} />
+    <CustomButton text="Say hello" onPress={() => alert("Importing Custom Btn from external file worked!")} />
   </View>
 );
