@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, Text, View, StyleSheet, SafeAreaView } from "react-native";
 
 const styles = StyleSheet.create({
@@ -16,13 +16,36 @@ const styles = StyleSheet.create({
 });
 
 export default () => {
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    fetch("https://randomuser.me/api/?results=100&inc=name")
+      .then((response) => response.json())
+      .then((response) => {
+        setData(response.results);
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+        alert("Error:", error);
+      })
+      .finally(() => {
+        setIsLoading(false)
+      });
+  }, []);
+
+  if (isLoading) {
+    return (
+      <View>
+        <Text>Please wait for data to load</Text>
+      </View>
+    );
+  }
   return (
     <SafeAreaView>
       <FlatList
-        data={[
-          { name: { title: "Monsieur", first: "Emilio", last: "Legrand" } },
-          { name: { title: "Miss", first: "Linda", last: "King" } },
-        ]}
+        data={data}
         keyExtractor={(item) => `${item.name.first}-${item.name.last}`}
         renderItem={({ item }) => {
           return (
